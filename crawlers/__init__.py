@@ -1,0 +1,1 @@
+__all__=['AnnerleyFC','BlackStoneUnitedDragons','Fixture','MtGravattHawksFC','WestBrisbaneFalconsBC','WestDistrictsNA','WesternPrideFC']
