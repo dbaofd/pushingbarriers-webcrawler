@@ -5,6 +5,7 @@ def getFixturesFor_U14_d5():
     url = "http://websites.sportstg.com/team_info.cgi?c=1-9386-136810-517357-25667157&a=SFIX"
     team = "Annerley FC U14 Div 5 Sth"
     myFixtures = Fixture.getFixtures(url, team)
+    print("helloworld")
     return myFixtures
 
 
