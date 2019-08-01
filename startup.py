@@ -1,5 +1,8 @@
 from crawlers import *
 from mysqlhelper import MysqlHelper
+import datetime
+import time
+
 
 
 def main():
@@ -15,8 +18,12 @@ def main():
                        WestDistrictsNA.getFixturesFor_Riverlife_19_d4()
     allInfo = blackStoneGameInfo + annerleyGameInfo + westernPrideInfo + mtGravattInfo + westBrisbaneFalconsInfo + westDistrictInfo
     db = MysqlHelper.connectdb()
+    MysqlHelper.truncatedb(db)
     MysqlHelper.insertdb(db, allInfo)
+    MysqlHelper.setUpdateTime(db)
     MysqlHelper.closedb(db)
+    # MyLog.Logger('updated-game-schedule.log',level='updated-game-schedule').logger.info("updated-game-schedule");
+
 
 
 if __name__ == "__main__":
