@@ -1,23 +1,23 @@
 import pymysql
 import datetime
 
-def connectdb():
+def connect_db():
     print("connecting to Mysql")
-    db = pymysql.connect('localhost', 'root', 'root', 'PB')
+    db = pymysql.connect('localhost', 'root', 'root', 'PB')#uqANDpushingbarriers911@
     print("successfully connected")
     return db
 
 
-def closedb(db):
+def close_db(db):
     db.close()
 
 
-def insertdb(db, gamesInfo):
+def insert_db(db, gamesInfo):
     cursor = db.cursor()
-    sql="INSERT INTO game(game_team,game_round, game_date, game_time, game_venue, game_address, game_opposition) VALUES (%s, %s, %s,%s, %s, %s,%s)"
+    sql="INSERT INTO game(game_team,game_round, game_date, game_time, game_venue, game_address, game_opposition, game_team_id) VALUES (%s, %s, %s,%s, %s, %s,%s, %s)"
     param=[]
     for ele in gamesInfo:
-        param.append([ele.get_team(), ele.get_rnd(), ele.get_date(), ele.get_time(), ele.get_venue(), ele.get_address(), ele.get_opposition()])
+        param.append([ele.get_team(), ele.get_rnd(), ele.get_date(), ele.get_time(), ele.get_venue(), ele.get_address(), ele.get_opposition(), ele.get_team_id()])
     try:
         cursor.executemany(sql, param)
         db.commit()
@@ -27,7 +27,7 @@ def insertdb(db, gamesInfo):
         print(e)
         db.rollback()
 
-def truncatedb(db):
+def truncate_db(db):
     cursor=db.cursor()
     sql="TRUNCATE TABLE game"
     try:
@@ -39,7 +39,7 @@ def truncatedb(db):
         print(e)
         db.rollback()
 
-def setUpdateTime(db):
+def set_update_time(db):
     cursor = db.cursor()
     cursor.execute("SELECT * FROM gameupdatetime")
     today = datetime.datetime.now();
