@@ -66,15 +66,15 @@ def get_fixtures(url, team, team_id, team_type):
                 tdofTr = i.find_all('td')  # for every fixture, attributes are in different <td></td>
                 if (len(tdofTr) >= 8):  # why set td number greater than 8? Because  a fixture usually has 9 td tags
                     # while a fixture is cancelled, it has 8 td tags, you can check the web saurce code
-                    fixtureDate = format_date(tdofTr[1].get_text()[0:8])
-                    if (fixtureDate >= today):  # compare fixtureDate with today, we only focus on fixture after today
+                    fixture_date = format_date(tdofTr[1].get_text()[0:8])
+                    if (fixture_date >= today):  # compare fixtureDate with today, we only focus on fixture after today
                         if (team_type != 1):  # the only basketball team we got
                             print(tdofTr[3])
                             address = get_address_for_fc(tdofTr[3])
                         else:
                             address = get_address_for_bc(tdofTr[3])
                         my_fixtures.append(
-                            Fixture(tdofTr[0].get_text().strip(), datetime.datetime.strftime(fixtureDate, "%Y/%m/%d"),
+                            Fixture.Fixture(tdofTr[0].get_text().strip(), datetime.datetime.strftime(fixture_date, "%Y/%m/%d"),
                                     tdofTr[2].get_text(), tdofTr[3].get_text(), address, tdofTr[6].get_text(), team, team_id))
         else:
             my_fixtures.append(
