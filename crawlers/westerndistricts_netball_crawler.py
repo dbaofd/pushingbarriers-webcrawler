@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 from crawlers import Fixture
 import datetime
 
+
 def format_date_time(date_str):
     new_form_date_time = datetime.datetime.strptime(date_str, '%d %b %y %I:%M%p').date()
     return new_form_date_time
@@ -123,15 +124,17 @@ def get_fixtures(season_code, team_code, team_full_name, team_short_name, team_i
                                 fixture_opposition = td_of_tr[1].get_text()
                             address = get_address(td_of_tr[4])
                             my_fixtures.append(
-                                Fixture.Fixture(rnd, fixture_date, fixture_time, td_of_tr[4].get_text().replace('\n', ''),
+                                Fixture.Fixture(rnd, fixture_date, fixture_time,
+                                                td_of_tr[4].get_text().replace('\n', ''),
                                                 address, fixture_opposition, team_full_name, team_id))
         else:
             my_fixtures.append(
                 Fixture.Fixture('', '', '', 'website server internal error(' + str(r.status_code) + ')',
-                                'fail to grap info for this team', '', team_full_name))
+                                'fail to grab info for this team', '', team_full_name))
     else:
         my_fixtures.append(
-            Fixture.Fixture('', '', '', 'website is unreachable', 'fail to grap info for this team', '', team_full_name))
+            Fixture.Fixture('', '', '', 'website is unreachable', 'fail to grab info for this team', '',
+                            team_full_name))
 
     Fixture.print_fixtures(my_fixtures)
     # Fixture.writeOutputFile(r)

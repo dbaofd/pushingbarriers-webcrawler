@@ -69,7 +69,6 @@ def get_fixtures(url, team, team_id, team_type):
                     fixture_date = format_date(tdofTr[1].get_text()[0:8])
                     if (fixture_date >= today):  # compare fixtureDate with today, we only focus on fixture after today
                         if (team_type != 1):  # the only basketball team we got
-                            print(tdofTr[3])
                             address = get_address_for_fc(tdofTr[3])
                         else:
                             address = get_address_for_bc(tdofTr[3])
@@ -78,11 +77,11 @@ def get_fixtures(url, team, team_id, team_type):
                                     tdofTr[2].get_text(), tdofTr[3].get_text(), address, tdofTr[6].get_text(), team, team_id))
         else:
             my_fixtures.append(
-                Fixture('', '', '', 'website server internal error(' + str(r.status_code) + ')',
-                        'fail to grap info for this team', '', team, team_id))
+                Fixture.Fixture('', '', '', 'website server internal error(' + str(r.status_code) + ')',
+                        'fail to grab info for this team', '', team, team_id))
     else:
         my_fixtures.append(
-            Fixture('', '', '', 'website is unreachable', 'fail to grap info for this team', '', team, team_id))
+            Fixture.Fixture('', '', '', 'website is unreachable', 'fail to grab info for this team', '', team, team_id))
     Fixture.print_fixtures(my_fixtures)
     write_output_file(r)
 

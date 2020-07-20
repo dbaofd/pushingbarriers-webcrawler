@@ -1,7 +1,7 @@
-#Game schedule class
+# Game schedule class
 class Fixture():
     def __init__(self, rnd, date, time, venue, address, opposition, team, team_id):
-        self.rnd = rnd #round
+        self.rnd = rnd  # round
         self.date = date
         self.time = time
         self.venue = venue
@@ -34,13 +34,11 @@ class Fixture():
     def get_team_id(self):
         return self.team_id
 
+
 def print_fixtures(my_fixtures):
     for index in range(0, len(my_fixtures)):
         print(my_fixtures[index].get_rnd() + "\n" + my_fixtures[index].get_date() + "\n" + my_fixtures[
             index].get_time() + "\n" + my_fixtures[index].get_venue() + "\n" + my_fixtures[index].get_address()
-              + '\n' + my_fixtures[index].get_opposition() + "\n" + my_fixtures[index].get_team()+ "\n", my_fixtures[index].get_team_id())
+              + '\n' + my_fixtures[index].get_opposition() + "\n" + my_fixtures[index].get_team() + "\n",
+              my_fixtures[index].get_team_id())
         print("**************************")
-
-
-
-

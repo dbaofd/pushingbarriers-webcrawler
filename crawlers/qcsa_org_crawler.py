@@ -4,6 +4,7 @@ from crawlers import Fixture
 import datetime
 import re
 
+
 def format_date(date_str):
     new_form_date = re.sub(r'(\d)(st|nd|rd|th)', r'\1', date_str)  # remove st,nd,rd,th from date
     new_form_date = re.sub("'", "20", new_form_date)  # replace ' with 20
@@ -47,28 +48,28 @@ def get_fixtures(data, team, team_id):
                     tr_of_table = i.find_all('tr')
 
                     for indexj, j in enumerate(tr_of_table):
-                        if (indexj > 0):#indexj=0 is the table title
+                        if (indexj > 0):  # indexj=0 is the table title
                             td_of_tr = j.find_all('td')
                             fixture_date = format_date(td_of_tr[1].get_text())
                             today = datetime.date.today()  # get today's date
                             if (fixture_date >= today):  # we only focus on matches after today
-                                if (td_of_tr[6].get('class') != None):#td with class label is my team
+                                if (td_of_tr[6].get('class') != None):  # td with class label is my team
                                     # if class != none means this tag is our team, other this tag is opsition
                                     fixture_opposition = td_of_tr[8].get_text()  # here we need to find opposition
                                 else:
                                     fixture_opposition = td_of_tr[6].get_text()
                                 detailed_venue = get_address(td_of_tr[10])
                                 my_fixtures.append(Fixture.Fixture(td_of_tr[0].get_text().strip(),
-                                                                  datetime.datetime.strftime(fixture_date, "%Y/%m/%d"),
-                                                                  td_of_tr[2].get_text(), td_of_tr[10].get_text(),
-                                                                  detailed_venue, fixture_opposition, team, team_id))
+                                                                   datetime.datetime.strftime(fixture_date, "%Y/%m/%d"),
+                                                                   td_of_tr[2].get_text(), td_of_tr[10].get_text(),
+                                                                   detailed_venue, fixture_opposition, team, team_id))
         else:
             my_fixtures.append(
                 Fixture.Fixture('', '', '', 'website server internal error(' + str(r.status_code) + ')',
-                                'fail to grap info for this team', '', team, team_id))
+                                'fail to grab info for this team', '', team, team_id))
     else:
         my_fixtures.append(
-            Fixture.Fixture('', '', '', 'website is unreachable', 'fail to grap info for this team', '', team, team_id))
+            Fixture.Fixture('', '', '', 'website is unreachable', 'fail to grab info for this team', '', team, team_id))
     Fixture.print_fixtures(my_fixtures)
     # Fixture.writeOutputFile(r)
     return my_fixtures
