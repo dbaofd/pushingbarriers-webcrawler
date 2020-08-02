@@ -4,8 +4,16 @@ from crawlers import Fixture
 import datetime
 import re
 
-
+"""
+Summary of the file.
+The crawler is for qcsa website.
+"""
 def format_date(date_str):
+    """
+    Resolve the extracted date, transform it into to standard date form.
+    :param date_str: string.
+    :return: new_form_date: date.
+    """
     new_form_date = re.sub(r'(\d)(st|nd|rd|th)', r'\1', date_str)  # remove st,nd,rd,th from date
     new_form_date = re.sub("'", "20", new_form_date)  # replace ' with 20
     new_form_date = datetime.datetime.strptime(new_form_date, '%d %b %Y').date()
@@ -13,6 +21,11 @@ def format_date(date_str):
 
 
 def get_address(venue_td):
+    """
+    Get the address of a game.
+    :param venue_td: html <td>.
+    :return: address: string.
+    """
     a = venue_td.find_all('a')
     address = ''
     if (a != []):
@@ -30,6 +43,13 @@ def get_address(venue_td):
 
 
 def get_fixtures(data, team, team_id):
+    """
+    Get the fixtures for a team.
+    :param data: json, data used to query fixtures for a team.
+    :param team:
+    :param team_id:
+    :return: my_fixtures: fixtures of a team.
+    """
     url = "http://www.qcsa.org.au/Draw/WebsiteComponents/ShowResultsDisplayData.asp"
     my_fixtures = []
     exception_flag = False
@@ -71,5 +91,4 @@ def get_fixtures(data, team, team_id):
         my_fixtures.append(
             Fixture.Fixture('', '', '', 'website is unreachable', 'fail to grab info for this team', '', team, team_id))
     Fixture.print_fixtures(my_fixtures)
-    # Fixture.writeOutputFile(r)
     return my_fixtures

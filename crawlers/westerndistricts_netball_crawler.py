@@ -3,19 +3,38 @@ from bs4 import BeautifulSoup
 from crawlers import Fixture
 import datetime
 
-
+"""
+Summary of this file.
+This crawler is for westerndistricts website.
+"""
 def format_date_time(date_str):
+    """
+    Transform string date into date.
+    :param date_str: string.
+    :return: new_form_date_time: date.
+    """
     new_form_date_time = datetime.datetime.strptime(date_str, '%d %b %y %I:%M%p').date()
     return new_form_date_time
 
 
 def get_date_and_time_string(date_str):
+    """
+    Get the game date and time.
+    :param date_str: string
+    :return: date.
+    :return: time.
+    """
     new_form_date_time = datetime.datetime.strptime(date_str, '%d %b %y %I:%M%p')
     new_form_date_time = datetime.datetime.strftime(new_form_date_time, '%Y/%m/%d %H:%M')
     return new_form_date_time[0:10], new_form_date_time[11:]
 
 
 def get_address(venue_td):
+    """
+    Get the address of each game.
+    :param venue_td: html <td>.
+    :return: address: string.
+    """
     address = ''
     a = venue_td.find('a')
     # a['onclick']: javascript:sh_ven(8674,39344,1);
@@ -33,9 +52,16 @@ def get_address(venue_td):
     return address
 
 
-def do_first_request():  # this website uses viewstate, in order to imitate request data from server,
-    # here the first thing we need to do is to get the viewstate, viewgenerator, eventVlidation
-    # from the website by visiting the website
+def do_first_request():
+    """
+    This website uses viewstate, in order to imitate request data from server,
+    here the first thing we need to do is to get the viewstate, viewgenerator, eventVlidation
+    from the website by visiting the website.
+    :return: view_state:
+    :return: view_generator:
+    :return: event_validation:
+    """
+    #
     url = "http://www.westerndistricts.qld.netball.com.au/common/pages/public/rv/draw.aspx"
     exception_falg = False
     try:
@@ -59,6 +85,15 @@ def do_first_request():  # this website uses viewstate, in order to imitate requ
 
 
 def get_fixtures(season_code, team_code, team_full_name, team_short_name, team_id):
+    """
+    Get fixtures for a team.
+    :param season_code: string
+    :param team_code: string
+    :param team_full_name: string
+    :param team_short_name: string
+    :param team_id: integer
+    :return: my_fixtures: fixtures of a team.
+    """
     view_state, view_generator, event_validation = do_first_request()
     url = "http://www.westerndistricts.qld.netball.com.au/common/pages/public/rv/draw.aspx"
     querystring = {"entityid": "39344"}

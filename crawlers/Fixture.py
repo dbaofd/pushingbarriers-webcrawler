@@ -36,6 +36,11 @@ class Fixture():
 
 
 def print_fixtures(my_fixtures):
+    """
+    Print fixtures for a team.
+    :param my_fixtures: list.
+    :return:
+    """
     for index in range(0, len(my_fixtures)):
         print(my_fixtures[index].get_rnd() + "\n" + my_fixtures[index].get_date() + "\n" + my_fixtures[
             index].get_time() + "\n" + my_fixtures[index].get_venue() + "\n" + my_fixtures[index].get_address()

@@ -3,11 +3,26 @@ from bs4 import BeautifulSoup
 import requests
 from crawlers import Fixture
 
+"""
+Summary of the file.
+This crawler is for sportstg website.
+"""
 def format_date(str_date):
+    """
+    Transform string date to date.
+    :param str_date: string.
+    :return: new_form_date: date.
+    """
     new_form_date = datetime.datetime.strptime(str_date, '%d/%m/%y').date()
     return new_form_date
 
+
 def write_output_file(r):
+    """
+    Write crawled webpage.
+    :param r:
+    :return:
+    """
     file_name = "output.html"
     f = open(file_name, "w")
     f.write(r.content.decode("utf-8"))
@@ -15,6 +30,11 @@ def write_output_file(r):
 
 
 def get_address_for_fc(venue_td):
+    """
+    Get address for foot club game.
+    :param venue_td: html <td>.
+    :return: address: string.
+    """
     a = venue_td.find_all('a')  # the venue td contains <a> tag with href, the href links to a detail
     address = ''  # localtion of venue
     if (a != []):  # the length of a is 1 aways
@@ -33,6 +53,11 @@ def get_address_for_fc(venue_td):
 
 
 def get_address_for_bc(venue_td):
+    """
+    Get address for basketball club game.
+    :param venue_td: html <td>.
+    :return: address: string.
+    """
     # the reason we need this function is football venues and basketball venues have different web page structures
     # so we need this to grap detailed venue for basketball club
     a = venue_td.find_all('a')
@@ -49,7 +74,15 @@ def get_address_for_bc(venue_td):
 
 
 def get_fixtures(url, team, team_id, team_type):
-    #team_type 1:basket, 0:football
+    """
+    Get fixtures for a team.
+    :param url:
+    :param team:
+    :param team_id:
+    :param team_type:
+    :return: my_fixtures: fixtures of a team.
+    """
+    # team_type 1:basket, 0:football
     my_fixtures = []
     exception_flag = False
     try:
@@ -73,12 +106,14 @@ def get_fixtures(url, team, team_id, team_type):
                         else:
                             address = get_address_for_bc(tdofTr[3])
                         my_fixtures.append(
-                            Fixture.Fixture(tdofTr[0].get_text().strip(), datetime.datetime.strftime(fixture_date, "%Y/%m/%d"),
-                                    tdofTr[2].get_text(), tdofTr[3].get_text(), address, tdofTr[6].get_text(), team, team_id))
+                            Fixture.Fixture(tdofTr[0].get_text().strip(),
+                                            datetime.datetime.strftime(fixture_date, "%Y/%m/%d"),
+                                            tdofTr[2].get_text(), tdofTr[3].get_text(), address, tdofTr[6].get_text(),
+                                            team, team_id))
         else:
             my_fixtures.append(
                 Fixture.Fixture('', '', '', 'website server internal error(' + str(r.status_code) + ')',
-                        'fail to grab info for this team', '', team, team_id))
+                                'fail to grab info for this team', '', team, team_id))
     else:
         my_fixtures.append(
             Fixture.Fixture('', '', '', 'website is unreachable', 'fail to grab info for this team', '', team, team_id))
