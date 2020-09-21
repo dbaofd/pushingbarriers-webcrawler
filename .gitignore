@@ -5,3 +5,7 @@ teams/__pycache__/
 __pycache__/
 .idea/
 output.html
+.DS_Store
+crawlers/.DS_Store
+mysql_helper/.DS_Store
+teams/.DS_Store
