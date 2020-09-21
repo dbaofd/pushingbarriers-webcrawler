@@ -5,6 +5,7 @@ from teams import annerley_fc
 from teams import south_united_fc
 from teams import centenary_stormers_fc
 from teams import ipswich_city_sc
+from teams import western_pride_fc
 from mysql_helper import mysql_helper
 import datetime
 import time
@@ -21,8 +22,10 @@ def main():
     south_united_fixtures = south_united_fc.get_fixtures_for_u14_d1()
     centenary_stormers_fixtures = centenary_stormers_fc.get_fixtures_for_u16_d3()
     ipswich_city_fixtures = ipswich_city_sc.get_fixtures_for_u18_women()
+    western_pride_fixtures = western_pride_fc.get_fixtures_for_u12_d1_sth()
     all_info = blackstone_fixtures + oxley_united_fixtures + mt_gravatt_fixtures + \
-               annerley_fixtures + south_united_fixtures + centenary_stormers_fixtures + ipswich_city_fixtures
+               annerley_fixtures + south_united_fixtures + centenary_stormers_fixtures + \
+               ipswich_city_fixtures + western_pride_fixtures
     db = mysql_helper.connect_db()
     mysql_helper.truncate_db(db)
     mysql_helper.insert_db(db, all_info)

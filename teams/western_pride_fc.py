@@ -16,6 +16,12 @@ def get_fixtures_for_u18_npl():
     my_fixtures = sportstg_com_crawler.get_fixtures(url, team, team_id, 0)
     return my_fixtures
 
+def get_fixtures_for_u12_d1_sth():
+    url = "https://websites.sportstg.com/team_info.cgi?c=1-9386-196515-561766-26692744&a=SFIX"
+    team = "Western Pride U12 Div1 Sth"
+    team_id = 31
+    my_fixtures = sportstg_com_crawler.get_fixtures(url, team, team_id, 0)
+    return my_fixtures
 
 def main():
     get_fixtures_for_u18_npl()
