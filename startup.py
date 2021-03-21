@@ -6,26 +6,30 @@ from teams import south_united_fc
 from teams import centenary_stormers_fc
 from teams import ipswich_city_sc
 from teams import western_pride_fc
+from teams import brisbane_strikers
+from teams import olympic_fc
+from teams import newmarket_fc
+from teams import rochedale_rovers
+from teams import grange_thistle
 from mysql_helper import mysql_helper
 import datetime
 import time
 
 
 def main():
-    blackstone_fixtures = blackstone_united_dragons_fc.get_fixtures_for_u18_d1() + blackstone_united_dragons_fc.get_fixtures_for_u1516b_d2() + \
-                          blackstone_united_dragons_fc.get_fixtures_for_u14_d1() + blackstone_united_dragons_fc.get_fixtures_for_u12_d2() + \
-                          blackstone_united_dragons_fc.get_fixtures_for_sm_d4()
-    oxley_united_fixtures = oxley_united_fc.get_fixtures_for_u18_d2_silver()
-    mt_gravatt_fixtures = mt_gravatt_hawks_fc.get_fixtures_for_u15_d2() + mt_gravatt_hawks_fc.get_fixtures_for_u14_d3_sth() + \
-                          mt_gravatt_hawks_fc.get_fixtures_for_mens_city7_gold()
-    annerley_fixtures = annerley_fc.get_fixtures_for_u13_d5_sth()
-    south_united_fixtures = south_united_fc.get_fixtures_for_u14_d1()
-    centenary_stormers_fixtures = centenary_stormers_fc.get_fixtures_for_u16_d3()
-    ipswich_city_fixtures = ipswich_city_sc.get_fixtures_for_u18_women()
-    western_pride_fixtures = western_pride_fc.get_fixtures_for_u12_d1_sth()
-    all_info = blackstone_fixtures + oxley_united_fixtures + mt_gravatt_fixtures + \
-               annerley_fixtures + south_united_fixtures + centenary_stormers_fixtures + \
-               ipswich_city_fixtures + western_pride_fixtures
+    mt_gravatt_fixtures = mt_gravatt_hawks_fc.get_fixtures_for_u15_d2() + mt_gravatt_hawks_fc.get_fixtures_for_u16_d2()
+    annerley_fixtures = annerley_fc.get_fixtures_for_u14_d4()
+    brisbane_strikers_fixtures = brisbane_strikers.get_fixtures_for_u15_npl()
+    centenary_stormers_fixtures = centenary_stormers_fc.get_fixtures_for_u13_bypl() + centenary_stormers_fc.get_fixtures_for_u14_bypl() + \
+                                  centenary_stormers_fc.get_fixtures_for_u16_d4()
+    western_pride_fixtures = western_pride_fc.get_fixtures_for_u13_npl()
+    olympic_fc_fixtures = olympic_fc.get_fixtures_for_u14_d1()
+    newmarket_fc_fixtures = newmarket_fc.get_fixtures_for_u13_d3()
+    rochedale_rovers_fixtures = rochedale_rovers.get_fixtures_for_u14_bypl()
+    grange_thistle_fixtures = grange_thistle.get_fixtures_for_u14_girls_d1()
+    all_info = mt_gravatt_fixtures + annerley_fixtures + brisbane_strikers_fixtures + \
+               centenary_stormers_fixtures + western_pride_fixtures + olympic_fc_fixtures + \
+               newmarket_fc_fixtures + rochedale_rovers_fixtures + grange_thistle_fixtures
     db = mysql_helper.connect_db()
     mysql_helper.truncate_db(db)
     mysql_helper.insert_db(db, all_info)
