@@ -40,6 +40,12 @@ def get_fixtures_for_u13_d5_sth():
     my_fixtures = sportstg_com_crawler.get_fixtures(url, team, team_id, 0)
     return my_fixtures
 
+def get_fixtures_for_u14_d4():
+    url = "https://websites.sportstg.com/team_info.cgi?c=1-9386-136810-576921-26817055&a=SFIX"
+    team = "Annerley U14 Div4 Sth"
+    team_id = 34
+    my_fixtures = sportstg_com_crawler.get_fixtures(url, team, team_id, 0)
+    return my_fixtures
 
 def main():
     get_fixtures_for_u14_d5()

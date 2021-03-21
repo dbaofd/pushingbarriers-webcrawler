@@ -18,7 +18,7 @@ def get_fixtures_for_mens_city_league4():
 
 
 def get_fixtures_for_u15_d2():
-    url = "https://websites.sportstg.com/team_info.cgi?c=1-9386-136864-553723-26676362&a=SFIX"
+    url = "https://websites.sportstg.com/team_info.cgi?c=1-9386-136864-576936-26817149&a=SFIX"
     team = "Mt Gravatt Hawks U15 Div2"
     team_id = 25
     my_fixtures = sportstg_com_crawler.get_fixtures(url, team, team_id, 0)
@@ -40,6 +40,12 @@ def get_fixtures_for_mens_city7_gold():
     my_fixtures = sportstg_com_crawler.get_fixtures(url, team, team_id, 0)
     return my_fixtures
 
+def get_fixtures_for_u16_d2():
+    url = "https://websites.sportstg.com/team_info.cgi?c=1-9386-136864-576943-26817056&a=SFIX"
+    team = "Mt Gravatt Hawks U16 Div2"
+    team_id = 32
+    my_fixtures = sportstg_com_crawler.get_fixtures(url, team, team_id, 0)
+    return my_fixtures
 
 def main():
     get_fixtures_for_u12_d6()

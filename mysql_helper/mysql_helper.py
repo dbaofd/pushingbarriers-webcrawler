@@ -7,7 +7,7 @@ These tools are used to connect MySql.
 """
 def connect_db():
     print("connecting to Mysql")
-    db = pymysql.connect('localhost', 'root', 'root', 'PB')
+    db = pymysql.connect('localhost', 'root', 'uqANDpushingbarriers911@', 'PB')
     print("successfully connected")
     return db
 
