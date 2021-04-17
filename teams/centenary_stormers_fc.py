@@ -28,3 +28,17 @@ def get_fixtures_for_u16_d4():
     team_id = 39
     my_fixtures = sportstg_com_crawler.get_fixtures(url, team, team_id, 0)
     return my_fixtures
+
+def get_fixtures_for_u18_d2():
+    url = "https://websites.sportstg.com/team_info.cgi?c=1-9386-136821-576980-26831706&a=SFIX"
+    team = "Centenary Stormers Mens U18 Div2"
+    team_id = 40
+    my_fixtures = sportstg_com_crawler.get_fixtures(url, team, team_id, 0)
+    return my_fixtures
+
+def get_fixtures_for_u12_mixed_d7():
+    url = "https://websites.sportstg.com/team_info.cgi?c=1-9386-136821-586189-26846086&a=SFIX"
+    team = "Centenary Stormers U12 Mixed Div7"
+    team_id = 36
+    my_fixtures = sportstg_com_crawler.get_fixtures(url, team, team_id, 0)
+    return my_fixtures
