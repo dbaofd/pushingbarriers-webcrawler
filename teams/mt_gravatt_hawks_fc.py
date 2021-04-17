@@ -47,6 +47,13 @@ def get_fixtures_for_u16_d2():
     my_fixtures = sportstg_com_crawler.get_fixtures(url, team, team_id, 0)
     return my_fixtures
 
+def get_fixtures_for_u18_d3():
+    url = "https://websites.sportstg.com/team_info.cgi?c=1-9386-136864-576979-26831528&a=SFIX"
+    team = "Mt Gravatt Hawks U18 Div3"
+    team_id = 33
+    my_fixtures = sportstg_com_crawler.get_fixtures(url, team, team_id, 0)
+    return my_fixtures
+
 def main():
     get_fixtures_for_u12_d6()
 
