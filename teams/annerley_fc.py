@@ -47,6 +47,13 @@ def get_fixtures_for_u14_d4():
     my_fixtures = sportstg_com_crawler.get_fixtures(url, team, team_id, 0)
     return my_fixtures
 
+def get_fixtures_for_u14_d2():
+    url = "https://websites.mygameday.app/team_info.cgi?c=0-9386-136810-602201-26934181&a=SFIX"
+    team = "Annerley U14 Div2 South"
+    team_id = 70
+    my_fixtures = sportstg_com_crawler.get_fixtures(url, team, team_id, 0)
+    return my_fixtures
+
 def main():
     get_fixtures_for_u14_d5()
 
